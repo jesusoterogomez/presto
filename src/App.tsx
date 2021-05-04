@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.less';
-import ConfigurationForm from './components/ConfigurationForm/ConfigurationForm';
 import { CountdownRenderProps, zeroPad } from 'react-countdown';
 import { Configuration } from './types';
 import { CountdownApi } from 'react-countdown/dist/Countdown';
 import Background from './components/Background/Background';
 import Counter from './components/Counter/Counter';
+import CountdownSetup from './components/CountdownSetup/CountdownSetup';
 
 const App = (): JSX.Element => {
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -59,7 +59,7 @@ const App = (): JSX.Element => {
             <Counter date={countdownDate} renderer={renderer} />
           </div>
         ) : (
-          <ConfigurationForm onSubmit={handleSubmit} />
+          <CountdownSetup onSubmit={handleSubmit} />
         )}
       </header>
     </div>
