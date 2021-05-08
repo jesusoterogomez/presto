@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Configuration } from '../../types';
 import './CountdownSetup.less';
 import { videoSearch } from '../../api/youtube';
+import SearchBar from '../SearchBar/SearchBar';
 
 interface Props {
   onSubmit: (data: Configuration) => void;
@@ -38,6 +39,8 @@ const ConfigurationForm: ({ onSubmit }: Props) => JSX.Element = ({
         <div className="GiphyCountdownOption">Giphy</div>
         <div className="YoutubeCountdownOption">Youtube</div>
       </div>
+
+      <SearchBar />
     </div>
   );
 };
