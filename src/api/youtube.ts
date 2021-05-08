@@ -1,6 +1,6 @@
 import YoutubeSearch from 'youtube-api-search';
 
-type YoutubeSearchResults = {
+export type YoutubeSearchResults = {
   kind: string;
   etag: string;
   nextPageToken: string;
@@ -12,7 +12,7 @@ type YoutubeSearchResults = {
   items: YoutubeSearchResultItem[];
 };
 
-type YoutubeSearchResultItem = {
+export type YoutubeSearchResultItem = {
   kind: string;
   etag: string;
   id: {
@@ -49,15 +49,15 @@ type YoutubeSearchResultItem = {
 
 export const videoSearch = async (
   term: string
-): Promise<YoutubeSearchResults> => {
+): Promise<YoutubeSearchResultItem[]> => {
   const results = await new Promise((resolve) => {
     YoutubeSearch(
-      { key: process.env.REACT_APP_YOUTUBE_API_KEY, term: term },
+      { key: process.env.REACT_APP_YOUTUBE_API_KEY, term },
       (videos: YoutubeSearchResults) => {
         resolve(videos);
       }
     );
   });
 
-  return results as YoutubeSearchResults;
+  return results as YoutubeSearchResultItem[];
 };
