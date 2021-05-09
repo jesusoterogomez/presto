@@ -4,3 +4,4 @@ declare module '*.module.less' {
 }
 
 declare module 'youtube-api-search';
+declare module 'feather-icons-react';
