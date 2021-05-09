@@ -1,5 +1,91 @@
 .CountdownSetup {
+  color: white;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: center;
+}
+
+.CountdownStartButton {
+  padding-top: 2em;
+  text-align: center;
+}
+
+.CountdownStartButton button {
+  font-family: 'Alfa Slab One', cursive;
+  padding: 1rem 6rem;
+  border-radius: 99em;
+  border: none;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  color: rgb(7, 49, 35);
+  background-color: rgb(94, 221, 179);
+}
+
+.TimerSetupNumber {
+  display: inline-block;
+  background: none;
+  border: none;
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 6rem;
+  width: auto;
+}
+
+/* prepare wrapper element */
+.TimerSetup {
+  text-align: center;
   position: relative;
-  width: 80%;
-  z-index: 1000;
+  padding: 2em 0;
+  width: 200%;
+  height: 200px;
+  background-color: rgba(127, 228, 161, 0.1);
+  user-select: none;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+
+  h1 {
+    text-align: center;
+
+    font-family: 'Alfa Slab One', cursive;
+    font-weight: normal;
+    font-size: 4rem;
+    span {
+      font-size: 2rem;
+    }
+  }
+}
+
+.TimerSetupRange {
+  width: 40%;
+  pointer-events: none;
+}
+// input[type='range'] {
+//   pointer-events: none;
+// }
+
+// input[type='range']::-webkit-slider-thumb {
+//   pointer-events: auto;
+// }
+
+// input[type='range']::-moz-range-thumb {
+//   pointer-events: auto;
+// }
+
+// input[type='range']::-ms-thumb {
+//   pointer-events: auto;
+// }
+
+.CountdownSetupOmnibar {
+  margin-top: 2rem;
+  width: 100%;
+
+  &.HelpText {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
 }
