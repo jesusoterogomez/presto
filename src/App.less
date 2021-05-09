@@ -10,7 +10,8 @@ input {
   color: black;
 }
 
-.App-header {
+.App {
+  font-family: 'Montserrat', sans-serif;
   background-color: @background-color-base;
   min-height: 100vh;
   min-width: 100vw;
@@ -22,20 +23,18 @@ input {
   z-index: 1;
 }
 
-.select__SelectOption {
-  display: flex;
-  flex-direction: row;
-  padding: 1em;
+.Container {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  flex-grow: 1;
+}
 
-  .thumbnail {
-    padding-right: 1em;
-  }
-
-  &.select__SelectOptionFocused {
-    background-color: orange;
-  }
-
-  &.select__SelectOptionSelected {
-    background-color: red;
-  }
+.AppTitle {
+  color: white;
+  font-family: 'Monoton', cursive;
+  font-weight: normal;
+  font-size: 2em;
+  width: 100%;
+  padding-bottom: 6rem;
 }
