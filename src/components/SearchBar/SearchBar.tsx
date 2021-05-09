@@ -1,28 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { videoSearch, YoutubeSearchResultItem } from '../../api/youtube';
-import styled from '@emotion/styled';
-
-const StyledSearch = styled(Select)`
-  .select__menu-list::-webkit-scrollbar {
-    width: 4px;
-    height: 0px;
-  }
-  .select__menu-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  .select__menu-list::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  .select__menu-list::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-`;
-
-type State = {
-  inputValue: string;
-};
+import { decodeHTMLEntities } from '../../utils/html';
+import './SearchBar.less';
 
 const SearchBar: () => JSX.Element = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -59,15 +39,16 @@ const SearchBar: () => JSX.Element = () => {
 
   const options = formatOptions(videos);
   return (
-    <StyledSearch
+    <Select
       components={{ Option }}
       inputValue={searchTerm}
       options={options}
       onInputChange={handleChange}
-      placeholder="Search..."
+      placeholder="Type to search"
       isClearable={true}
+      backspaceRemovesValue={true}
       openMenuOnClick={false}
-      classNamePrefix="select"
+      classNamePrefix="searchbar"
     />
   );
 };
@@ -82,9 +63,7 @@ type CustomOptionProps = {
 };
 
 const Option = (props: any) => {
-  // const { children, data } = props as CustomOptionProps;
   const {
-    children,
     className,
     cx,
     data,
@@ -115,7 +94,7 @@ const Option = (props: any) => {
       </div>
       <div className="information">
         <div className="title">
-          <h4>{data.item.snippet.title}</h4>
+          <h4>{decodeHTMLEntities(data.item.snippet.title)}</h4>
         </div>
       </div>
     </div>

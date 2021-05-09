@@ -1,0 +1,90 @@
+.searchbar__SelectOption {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  color: black;
+
+  .thumbnail {
+    padding-right: 1em;
+  }
+
+  &.searchbar__SelectOptionFocused {
+    background-color: rgba(101, 201, 168, 0.5);
+  }
+
+  &.searchbar__SelectOptionSelected {
+    // background-color: rgba(101, 201, 168, 0.5);
+  }
+}
+
+.searchbar__menu-list::-webkit-scrollbar {
+  width: 4px;
+  height: 0px;
+}
+.searchbar__menu-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.searchbar__menu-list::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.searchbar__menu-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.searchbar__control {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 99em !important;
+
+  &--is-focused {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.searchbar__value-container {
+  padding: 1em 2em !important;
+}
+
+// const customStyles = {
+//   control: (base, state) => ({
+//     ...base,
+//     fontFamily: 'Times New Roman',
+//     fontSize: 18,
+//     border: state.isFocused ? 0 : 0,
+//     boxShadow: state.isFocused ? 0 : 0,
+//     cursor: 'text',
+//     borderRadius: 0,
+//     borderBottom: 'solid 1px',
+//   }),
+
+//   option: (styles, { isFocused }) => {
+//     return {
+//       ...styles,
+//       cursor: 'pointer',
+//       backgroundColor: isFocused ? 'white' : 'white',
+//       color: isFocused ? 'rgba(255, 80, 86)' : 'black',
+//       lineHeight: 2,
+//     }
+//   },
+
+//   input: styles => ({
+//     ...styles,
+//     color: 'black',
+//     fontFamily: 'Times New Roman, Times, Serif',
+//   }),
+
+//   menu: styles => ({
+//     ...styles,
+//     marginTop: 0,
+//     boxShadow: 'none',
+//     borderRadius: 0,
+//   }),
+
+//   singleValue: styles => ({
+//     ...styles,
+//     color: 'rgba(255, 80, 86)',
+//   }),
+// }
