@@ -1,13 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Gif } from '@giphy/react-components';
-import { fetchGif, GifResultData } from '../../api/giphy';
+import { searchGif, GifResultData } from '../../api/giphy';
+import './GiphyBackdrop.less';
 
-export const GiphyBackdrop: React.FC = () => {
+interface Props {
+  curtainOpacity?: number;
+  /*
+   Display a single random Giphy gif by searching with a keyword
+  */
+  giphySearchTerm?: string;
+  /*
+   Supply multiple search terms. One will be chosen randomly to search Giphy and display a single Gif (Useful for getting more "randomness")
+  */
+  giphyRandomSearchTerms?: string[];
+}
+
+const selectRandomTerm = (terms: string[]) => {
+  return terms[Math.floor(Math.random() * terms.length)];
+};
+
+export const GiphyBackdrop: React.FC<Props> = ({
+  curtainOpacity = 0,
+  giphySearchTerm = 'random',
+  giphyRandomSearchTerms,
+}: Props) => {
   const [data, setData] = useState({} as GifResultData);
 
   useEffect(() => {
+    const term = giphyRandomSearchTerms
+      ? selectRandomTerm(giphyRandomSearchTerms)
+      : giphySearchTerm;
     const fetchData = async () => {
-      setData(await fetchGif('fpXxIjftmkk9y'));
+      setData(await searchGif(term, 'stickers'));
     };
 
     fetchData();
@@ -17,5 +40,16 @@ export const GiphyBackdrop: React.FC = () => {
     return null;
   }
 
-  return <Gif gif={data} width={300} />;
+  return (
+    <div className="GiphyBackdrop">
+      <div
+        className="GiphyBackdropCurtain"
+        style={{ opacity: curtainOpacity }}
+      />
+      <div
+        className="GiphyBackdropImage"
+        style={{ backgroundImage: `url(${data.images.original.url})` }}
+      ></div>
+    </div>
+  );
 };
