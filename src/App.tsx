@@ -52,16 +52,18 @@ const App = (): JSX.Element => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        {submitted ? (
-          <div className={'Countdown'}>
-            <Background url={backgroundUrl} />
-            <Counter date={countdownDate} renderer={renderer} />
-          </div>
-        ) : (
+      {submitted ? (
+        <div className={'Countdown'}>
+          <Background url={backgroundUrl} />
+          <Counter date={countdownDate} renderer={renderer} />
+        </div>
+      ) : (
+        <div className="Container">
+          <h1 className="AppTitle">presto</h1>
+
           <CountdownSetup onSubmit={handleSubmit} />
-        )}
-      </header>
+        </div>
+      )}
     </div>
   );
 };
