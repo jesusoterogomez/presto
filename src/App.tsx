@@ -22,17 +22,13 @@ const App = (): JSX.Element => {
     hours,
     minutes,
     seconds,
-    milliseconds,
     completed,
     api,
   }: CountdownRenderProps) => {
     if (completed) {
       return <Completionist />;
     } else {
-      let span = `${zeroPad(minutes)}:${zeroPad(seconds)}:${zeroPad(
-        milliseconds,
-        3
-      )}`;
+      let span = `${zeroPad(minutes)}:${zeroPad(seconds)}`;
       if (hours) span = `${zeroPad(hours)}:${span}`;
       if (days) span = `${days} days ${span}`;
       setCountdownApi(api);
