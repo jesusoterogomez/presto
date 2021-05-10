@@ -1,4 +1,5 @@
 import YoutubeSearch from 'youtube-api-search';
+import { decodeHTMLEntities } from '../utils/html';
 
 export type YoutubeSearchResults = {
   kind: string;
@@ -47,6 +48,17 @@ export type YoutubeSearchResultItem = {
   };
 };
 
+export const fixEncodedStrings = (
+  results: YoutubeSearchResultItem[]
+): YoutubeSearchResultItem[] => {
+  return results.map((item) => {
+    item.snippet.title = decodeHTMLEntities(item.snippet.title);
+    item.snippet.description = decodeHTMLEntities(item.snippet.description);
+
+    return item;
+  });
+};
+
 export const videoSearch = async (
   term: string
 ): Promise<YoutubeSearchResultItem[]> => {
@@ -59,5 +71,5 @@ export const videoSearch = async (
     );
   });
 
-  return results as YoutubeSearchResultItem[];
+  return fixEncodedStrings(results as YoutubeSearchResultItem[]);
 };
