@@ -36,55 +36,86 @@
   outline: none !important;
   box-shadow: none !important;
   border-radius: 99em !important;
-
+  position: relative !important;
+  z-index: 2 !important;
   &--is-focused {
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
+    // background-color: orange !important;
   }
+}
+
+.searchbar__menu {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  width: 95% !important;
+  left: 2.5%;
+}
+
+.searchbar__input {
+  // width: 100% !important;
+}
+
+.searchbar__placeholder {
+  opacity: 0.5;
 }
 
 .searchbar__value-container {
   padding: 1em 2em !important;
 }
 
-// const customStyles = {
-//   control: (base, state) => ({
-//     ...base,
-//     fontFamily: 'Times New Roman',
-//     fontSize: 18,
-//     border: state.isFocused ? 0 : 0,
-//     boxShadow: state.isFocused ? 0 : 0,
-//     cursor: 'text',
-//     borderRadius: 0,
-//     borderBottom: 'solid 1px',
-//   }),
+.searchbar__indicator-separator {
+  display: none !important;
+}
 
-//   option: (styles, { isFocused }) => {
-//     return {
-//       ...styles,
-//       cursor: 'pointer',
-//       backgroundColor: isFocused ? 'white' : 'white',
-//       color: isFocused ? 'rgba(255, 80, 86)' : 'black',
-//       lineHeight: 2,
-//     }
-//   },
+.DropdownIndicator {
+  position: relative;
+  padding-right: 1.5rem !important;
+  top: 2px;
+}
 
-//   input: styles => ({
-//     ...styles,
-//     color: 'black',
-//     fontFamily: 'Times New Roman, Times, Serif',
-//   }),
+.ControlVideoSelected {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  align-items: center;
+  padding-right: 1.5rem;
 
-//   menu: styles => ({
-//     ...styles,
-//     marginTop: 0,
-//     boxShadow: 'none',
-//     borderRadius: 0,
-//   }),
+  img {
+    height: 50px;
+    padding-right: 0.5rem;
+  }
 
-//   singleValue: styles => ({
-//     ...styles,
-//     color: 'rgba(255, 80, 86)',
-//   }),
-// }
+  .VideoSelectedInfo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+  }
+
+  .ControlVideoSelected {
+    flex: 2;
+  }
+
+  .ControlVideoSelectedCancel {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    border-radius: 99em;
+    border: none;
+    outline: none;
+    color: white;
+    background: #583eb4;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.6rem 0.8rem;
+  }
+
+  p {
+    color: black;
+  }
+}
