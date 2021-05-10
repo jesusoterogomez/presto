@@ -15,7 +15,7 @@ const Counter: ({ date, renderer }: Props) => JSX.Element = ({
     <Countdown
       date={date}
       intervalDelay={0}
-      precision={2}
+      precision={1}
       renderer={renderer}
       autoStart={false}
     />
