@@ -12,7 +12,7 @@ interface Props {
   onSubmit: (data: Configuration) => void;
 }
 
-const ConfigurationForm: ({ onSubmit }: Props) => JSX.Element = ({
+const CountdownSetup: ({ onSubmit }: Props) => JSX.Element = ({
   onSubmit,
 }: Props) => {
   const newMinutes = 5;
@@ -113,4 +113,4 @@ const ConfigurationForm: ({ onSubmit }: Props) => JSX.Element = ({
   );
 };
 
-export default ConfigurationForm;
+export default CountdownSetup;
