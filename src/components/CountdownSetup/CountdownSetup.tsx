@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Configuration } from '../../types';
 import './CountdownSetup.less';
 import SearchBar from '../SearchBar/SearchBar';
@@ -7,6 +7,7 @@ import FeatherIcon from 'feather-icons-react';
 
 const MIN_VALUE = 1;
 const MAX_VALUE = 60;
+const INITIAL_VALUE = 5;
 
 interface Props {
   onSubmit: (data: Configuration) => void;
@@ -15,33 +16,32 @@ interface Props {
 const CountdownSetup: ({ onSubmit }: Props) => JSX.Element = ({
   onSubmit,
 }: Props) => {
-  const newMinutes = 5;
-  const [minutes, setMinutes] = useState(newMinutes);
+  const [minutes, setMinutes] = useState(INITIAL_VALUE);
   const [videoUrl, setVideoUrl] = useState('');
-  const [startDragValue, setStartDragValue] = useState(newMinutes);
+  const [startDragValue, setStartDragValue] = useState(INITIAL_VALUE);
 
   const [isDown, setDown] = useState(false);
   const [startX, setStartX] = useState(0);
 
+  const updateMinutes = (targetValue: number) => {
+    const clampedValue = Math.min(Math.max(targetValue, MIN_VALUE), MAX_VALUE); // Ensure the values stay within range
+    setMinutes(clampedValue);
+  };
+
+  // Reset the relevant states when the user stops dragging
   const handleUp = (): void => {
     setDown(false);
     setStartX(0);
     setStartDragValue(0);
   };
 
-  // clamp values
-  const updateMinutes = (targetValue: number) => {
-    const clampedValue = Math.min(Math.max(targetValue, MIN_VALUE), MAX_VALUE);
-    setMinutes(clampedValue);
-  };
-
   const handleMove = (event: React.MouseEvent<HTMLDivElement>): void => {
+    // Don't update the value if the mouse/cursor isn't pressed when moving. (ensure the user is dragging vs. moving the mouse)
     if (!isDown) {
       return;
     }
 
-    const sensitivity = 10;
-
+    const sensitivity = 10; // Controls how many pixels the cursor needs to be dragged to change 1 minute.
     const delta = event.clientX - startX;
     const unitChanges = Math.round(delta / sensitivity);
 
