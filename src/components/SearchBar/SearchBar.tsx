@@ -9,7 +9,7 @@ type Props = {
   onChange: (videoUrl: string) => void;
 };
 
-const DEBOUNCE_TIME = 1500; // Debounce time in milliseconds
+const DEBOUNCE_TIME = 1000; // Debounce time in milliseconds
 
 const SearchBar = (props: Props): JSX.Element => {
   let ref: any;
@@ -19,30 +19,22 @@ const SearchBar = (props: Props): JSX.Element => {
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null); // Reference for the debounce timeout
 
   useEffect(() => {
-    const updateVideos = async () => {
-      // Write at least 3 characters to search videos
-      if (searchTerm.length < 2) {
-        return;
-      }
-
-      const items = await videoSearch(searchTerm);
-
-      setVideos(items);
-    };
-
-    updateVideos();
-  }, [searchTerm]);
-
-  const handleChange = (updatedTerm: string) => {
-    // Clear any existing timeout to reset debounce
+    // Clear any existing timeout before setting a new one
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
 
-    // Set a new timeout to delay setting the search term by 3 seconds
-    debounceTimeout.current = setTimeout(() => {
-      setSearchTerm(updatedTerm);
+    // Reset the timeout to fetch search results after the debounce time
+    debounceTimeout.current = setTimeout(async () => {
+      if (searchTerm.length >= 2) {
+        const items = await videoSearch(searchTerm);
+        setVideos(items);
+      }
     }, DEBOUNCE_TIME);
+  }, [searchTerm]);
+
+  const handleChange = (updatedTerm: string) => {
+    setSearchTerm(updatedTerm);
   };
 
   const handleSelectVideo = (videoId: string) => {
