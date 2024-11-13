@@ -7,6 +7,9 @@
   "repository": "git@github.com:joylazari/video-countdown.git",
   "author": "Joy Lazari <joy.lazari@gmail.com>",
   "license": "Apache-2.0",
+  "engines": {
+    "node": "16"
+  },
   "dependencies": {
     "@emotion/styled": "^11.3.0",
     "@giphy/js-fetch-api": "^3.0.0",
