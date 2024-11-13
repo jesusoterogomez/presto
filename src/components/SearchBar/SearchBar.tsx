@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Select, { components } from 'react-select';
 import { videoSearch, YoutubeSearchResultItem } from '../../api/youtube';
 import { decodeHTMLEntities } from '../../utils/html';
@@ -9,11 +9,14 @@ type Props = {
   onChange: (videoUrl: string) => void;
 };
 
+const DEBOUNCE_TIME = 1500; // Debounce time in milliseconds
+
 const SearchBar = (props: Props): JSX.Element => {
   let ref: any;
   const [openMenuOnFocusFix, setOpenMenuOnFocusFix] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [videos, setVideos] = useState([] as YoutubeSearchResultItem[]);
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null); // Reference for the debounce timeout
 
   useEffect(() => {
     const updateVideos = async () => {
@@ -31,7 +34,15 @@ const SearchBar = (props: Props): JSX.Element => {
   }, [searchTerm]);
 
   const handleChange = (updatedTerm: string) => {
-    setSearchTerm(updatedTerm);
+    // Clear any existing timeout to reset debounce
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    // Set a new timeout to delay setting the search term by 3 seconds
+    debounceTimeout.current = setTimeout(() => {
+      setSearchTerm(updatedTerm);
+    }, DEBOUNCE_TIME);
   };
 
   const handleSelectVideo = (videoId: string) => {
@@ -123,10 +134,7 @@ const Control = (props: any) => {
         </div>
         <button
           className="ControlVideoSelectedCancel"
-          onClick={
-            () => rest.selectProps.reset()
-            // console.warn('Do something here', rest)
-          }
+          onClick={() => rest.selectProps.reset()}
         >
           Change&nbsp;
           <FeatherIcon icon="rotate-ccw" size="12" stroke="#FFF" />
